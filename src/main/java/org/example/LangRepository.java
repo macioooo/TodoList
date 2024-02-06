@@ -1,25 +1,29 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import jakarta.persistence.EntityManager;
+
 import java.util.Optional;
 
 public class LangRepository {
-    private List<Lang> langList;
+    private EntityManager entityManager = JpaManager.getEntityManager();
 
-    LangRepository() {
-        langList = new ArrayList<>();
-        langList.add(new Lang(1, "Hello", LangCodes.EN));
-        langList.add(new Lang(2, "Witaj", LangCodes.PL));
-    }
-    Optional<Lang> getLang(LangCodes code) {
-        return langList.stream().filter(l -> l.getCode().equals(code)).findFirst();
+    void createNewLanguage(Integer id, String welcomeMsg, String code) {
+
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(new Lang(id, welcomeMsg, code));
+            entityManager.getTransaction().commit();
+        } finally {
+            JpaManager.closeEntityManager(entityManager);
+        }
     }
 
-    Optional<Lang> findById(Integer idToBeFound) {
-        return langList.stream().filter(l -> l.getId()
-                .equals(idToBeFound))
-                .findFirst();
+    Optional<Lang> findById(Integer id) {
+        try {
+            Lang lang = entityManager.find(Lang.class, id);
+            return Optional.ofNullable(lang);
+        } finally {
+            JpaManager.closeEntityManager(entityManager);
+        }
     }
 }

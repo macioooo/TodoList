@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class HelloService {
     static final String FALLBACK_NAME = "world";
-    static final Lang FALLBACK_LANG = new Lang(1, "Hello", LangCodes.EN);
+    static final Lang FALLBACK_LANG = new Lang(1, "Hello", "en");
     private static final Logger logger = LoggerFactory.getLogger(HelloService.class);
 
     private LangRepository repository;
