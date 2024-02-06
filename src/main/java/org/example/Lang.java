@@ -1,8 +1,6 @@
 package org.example;
 
 import jakarta.persistence.*;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "LANGUAGES")
