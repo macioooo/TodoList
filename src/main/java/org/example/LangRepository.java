@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManager;
 import java.util.Optional;
 
 public class LangRepository {
-    private EntityManager entityManager = JpaManager.getEntityManager();
+    private final EntityManager entityManager = JpaManager.getEntityManager();
 
     void createNewLanguage(Integer id, String welcomeMsg, String code) {
 
