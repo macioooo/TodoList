@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+          integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Todo List</title>
 </head>
 <body>
-<h1>Hello list</h1>
+<form id="welcome" class="pure-form" style="width: 40%; margin: 0 auto">
+    <input type="text" name="name" class="pure-input-rounded" placeholder="name"/>
+    <label class="pure-radio">
+        <input type="radio" name="lang" value="1" checked/>
+        <img src="flags/usa_flag.png" width="30px" height="auto">
+    </label>
+    <label class="pure-radio">
+        <input type="radio" name="lang" value="2"/>
+        <img src="flags/polish_flag.png" width="30px" height="auto">
+    </label>
+    <button id="btn" class="pure-button pure-button-primary">Submit</button>
+</form>
+<script>
+    const form = document.getElementById("welcome");
+    document.getElementById("btn").addEventListener("click", (event)=>{
+    event.preventDefault();
+    const formObj = {
+        name: form.elements.name.value,
+        lang: form.elements.lang.value
+    };
+    fetch("http://localhost:8080/api?" + new URLSearchParams(formObj))
+    .then(response => response.text())
+    .then((text) => {
+    })
+    });
+</script>
 </body>
 </html>
