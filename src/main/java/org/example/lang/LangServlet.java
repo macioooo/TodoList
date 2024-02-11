@@ -1,4 +1,4 @@
-package org.example;
+package org.example.lang;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "Lang", urlPatterns = {"/api/langs"})
 public class LangServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(LangServlet.class);
-    private LangRepository langRepository;
+    private LangService langService;
     private ObjectMapper mapper;
 
     /**
@@ -22,11 +22,11 @@ public class LangServlet extends HttpServlet {
      */
     @SuppressWarnings("unused")
     public LangServlet() {
-        this(new LangRepository(), new ObjectMapper());
+        this(new LangService(), new ObjectMapper());
     }
 
-    LangServlet(LangRepository langRepository, ObjectMapper mapper) {
-        this.langRepository = langRepository;
+    LangServlet(LangService langService, ObjectMapper mapper) {
+        this.langService = langService;
         this.mapper = mapper;
     }
 
@@ -34,7 +34,7 @@ public class LangServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Request got " + req.getParameterMap());
         resp.setContentType("application/json;charset=UTF-8");
-        mapper.writeValue(resp.getOutputStream(), langRepository.findAll());
+        mapper.writeValue(resp.getOutputStream(), langService.findAll());
     }
 }
 

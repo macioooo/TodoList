@@ -4,14 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class JpaManager {
+public class JpaManager {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Maciej.sz");
 
-    static EntityManager getEntityManager() {
+    public static EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    static void closeEntityManager(EntityManager entityManager) {
+    public static void closeEntityManager(EntityManager entityManager) {
         if (entityManager != null && entityManager.isOpen()) {
             entityManager.close();
         }

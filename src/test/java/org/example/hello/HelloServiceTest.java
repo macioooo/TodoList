@@ -1,5 +1,8 @@
-package org.example;
+package org.example.hello;
 
+import org.example.hello.HelloService;
+import org.example.lang.Lang;
+import org.example.lang.LangRepository;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -81,7 +84,7 @@ public class HelloServiceTest {
     private LangRepository alwaysReturnHelloRepository() {
         return new LangRepository() {
             @Override
-            Optional<Lang> findById(Integer id) {
+            public Optional<Lang> findById(Integer id) {
                 return Optional.of(new Lang(null, WELCOME, null));
             }
         };

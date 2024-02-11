@@ -1,10 +1,10 @@
-package org.example;
+package org.example.lang;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "LANGUAGES")
-class Lang {
+public class Lang {
     @Id
     private Integer id;
     private String welcomeMsg;

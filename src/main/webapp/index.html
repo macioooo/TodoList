@@ -20,6 +20,19 @@
         'en': 'flags/usa_flag.png',
         'de': 'flags/german_flag.png'
     };
+    const div = document.getElementById("welcome")
+    const form = document.getElementById("welcomeForm");
+    fetch(`${API_URL}/langs`)
+        .then(response => response.json())
+        .then(langArr => {
+        const checkboxes = langArr.map(lang => `
+        <label class="pure-radio">
+        <input type="radio" name="lang" value="${lang.id}"/>
+        <img src="${CODE_TO_FLAG[lang.code]}" width="20px" height="auto">
+    </label>
+        `).join('\n');
+        document.getElementById("langs").innerHTML = checkboxes;
+        });
 
     document.getElementById("btn").addEventListener("click", (event)=>{
     event.preventDefault();
@@ -27,29 +40,14 @@
         name: form.elements.name.value,
         lang: form.elements.lang.value
     };
-    fetch(`${API_URL}/langs`)
-        .then(response => response.json())
-        .then(langArr => {
-        const checkboxes = langArr.map(lang => `
-        <label class="pure-radio">
-        <input type="radio" name="lang" value="${lang.id}"/>
-        <img src="${CODE_TO_FLAG[lang.code]}" width="30px" height="auto">
-    </label>
-        `).join('\n');
-        document.getElementById("langs").innerHTML = checkboxes;
-        });
-
-    const div = document.getElementById("welcome")
-    const form = document.getElementById("welcomeForm");
     fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
     .then(response => response.text())
     .then((text) => {
     div.innerHTML = `
         <h1>${text}</h1>
-    `;
-    //
+    `
     })
-    });
+});
 </script>
 </body>
 </html>

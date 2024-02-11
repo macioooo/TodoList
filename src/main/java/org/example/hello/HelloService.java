@@ -1,5 +1,7 @@
-package org.example;
+package org.example.hello;
 
+import org.example.lang.Lang;
+import org.example.lang.LangRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +30,9 @@ public class HelloService {
             langId = FALLBACK_LANG.getId();
         }
         var welcomeMsg = repository.findById(langId).orElse(FALLBACK_LANG).getWelcomeMsg();
-        var nameToWelcome = Optional.ofNullable(name).orElse(FALLBACK_NAME);
+        String nameToWelcome = Optional.ofNullable(name)
+                .filter(s -> !s.isEmpty())
+                .orElse(FALLBACK_NAME);
         return welcomeMsg + " " + nameToWelcome + "!";
     }
 }

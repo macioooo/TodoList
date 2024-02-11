@@ -1,6 +1,7 @@
-package org.example;
+package org.example.lang;
 
 import jakarta.persistence.EntityManager;
+import org.example.JpaManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class LangRepository {
         }
     }
 
-    Optional<Lang> findById(Integer id) {
+    public Optional<Lang> findById(Integer id) {
         EntityManager entityManager = JpaManager.getEntityManager();
         try {
             Lang lang = entityManager.find(Lang.class, id);
