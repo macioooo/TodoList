@@ -21,14 +21,8 @@ public class HelloService {
         this.repository = repository;
     }
     
-    String prepareGreeting(String name, String id) {
-        Integer langId;
-        try {
-            langId = Optional.ofNullable(id).map(Integer::valueOf).orElse(FALLBACK_LANG.getId());
-        } catch (NumberFormatException e) {
-            logger.warn("Non-numeric language is used: " + id);
-            langId = FALLBACK_LANG.getId();
-        }
+    String prepareGreeting(String name, Integer langId) {
+        langId = Optional.ofNullable(langId).orElse(FALLBACK_LANG.getId());
         var welcomeMsg = repository.findById(langId).orElse(FALLBACK_LANG).getWelcomeMsg();
         String nameToWelcome = Optional.ofNullable(name)
                 .filter(s -> !s.isEmpty())

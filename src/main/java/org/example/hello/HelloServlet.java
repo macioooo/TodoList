@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "Hello", urlPatterns ={"/api"})
 public class HelloServlet extends HttpServlet {
@@ -32,7 +33,13 @@ public class HelloServlet extends HttpServlet {
         logger.info("Request got " + req.getParameterMap());
         var getName = req.getParameter(NAME_PARAM);
         var getLang = req.getParameter(LANG_PARAM);
-                resp.getWriter().write(service.prepareGreeting(getName, getLang));
+        Integer langId = null;
+        try {
+            langId = Integer.valueOf(getLang);
+        } catch (NumberFormatException e) {
+            logger.warn("Non-numeric language is used: " + getLang);
+        }
+                resp.getWriter().write(service.prepareGreeting(getName, langId));
             }
     }
 
