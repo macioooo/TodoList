@@ -21,7 +21,7 @@ public class Lang {
      */
 
     @SuppressWarnings("unused")
-    Lang() {
+    public Lang() {
 
     }
 
