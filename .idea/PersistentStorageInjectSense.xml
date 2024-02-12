@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistentStorage">
+    <file path="src\main\webapp\index.html">
+      <placeInjection languageId="javascript" identifierStrategy="SingleInjectionStrategy" start="676" end="1803" />
+    </file>
+  </component>
+</project>
