@@ -47,14 +47,19 @@ I did it to learn the basics about CRUD, REST and HTTP :)
    ```bash
    mvn clean package
    ```
+4.Run Flyway migrations to apply database changes:
 
-4. Run the application using the embedded Jetty servlet container:
+```bash
+mvn flyway:migrate
+```
+
+5. Run the application using the embedded Jetty servlet container:
 
    ```bash
    java -jar target/TodoList.jar
    ```
 
-5. Open your web browser and navigate to `http://localhost:8080` to access the TODO application.
+6. Open your web browser and navigate to `http://localhost:8080` to access the TODO application.
 
 ## Usage
 
